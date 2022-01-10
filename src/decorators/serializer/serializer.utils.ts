@@ -9,9 +9,13 @@ export const serializeJSON = <T>(instance: Type, data): T => {
     return serializer ? serializeJSON(serializer, value) : data[responseKey];
   };
 
+  const getPropertyValue = (key: string, value) => {
+    return typeof value === 'object' ? processNestedSerialization(key, value) : value;
+  };
+
   const reduceValueByType = (instanceObject, [key, value]: [string, any]) => {
     const propertyKey = jsonPropertyStorage.getProperty(instanceObject.constructor.name, key);
-    if (propertyKey) instanceObject[propertyKey] = typeof value === 'object' ? processNestedSerialization(key, value) : value;
+    if (propertyKey) instanceObject[propertyKey] = getPropertyValue(key, value);
     return instanceObject;
   };
 
