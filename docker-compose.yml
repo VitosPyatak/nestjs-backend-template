@@ -17,8 +17,10 @@ services:
       - .env
     depends_on:
       - app-mongo
+      - app-redis
     links:
       - app-mongo
+      - app-redis
     volumes:
       - .:/app
       - /app/node_modules
@@ -35,9 +37,17 @@ services:
     networks:
       - app-network
 
+  app-redis:
+    image: redis:6.2
+    command: redis-server
+    container_name: ${REDIS_HOST}
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    networks:
+      - app-network
+
 networks:
   app-network:
 
 volumes:
   mongodb-data:
-

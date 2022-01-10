@@ -19,4 +19,12 @@ export class ConfigurationsManager {
       database: process.env[variableNames.mongo.database],
     };
   }
+
+  public get redis() {
+    return {
+      host: process.env[variableNames.redis.host],
+      port: process.env[variableNames.redis.port],
+      ttl: +process.env[variableNames.redis.ttl] || 3600,
+    };
+  }
 }
