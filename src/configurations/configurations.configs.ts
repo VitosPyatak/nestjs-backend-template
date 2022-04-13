@@ -8,4 +8,9 @@ export const variableNames = Object.freeze({
     password: 'MONGO_INITDB_ROOT_PASSWORD',
     database: 'MONGO_DB',
   },
+  redis: {
+    host: 'REDIS_HOST',
+    port: 'REDIS_PORT',
+    ttl: 'REDIS_TTL',
+  },
 });
